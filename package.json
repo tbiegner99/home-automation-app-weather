@@ -1,5 +1,5 @@
 {
-  "name": "@tbiegner99/home-automation-main-ui",
+  "name": "@tbiegner99/home-automation-app-weather",
   "version": "1.0.0",
   "description": "kareoke app",
   "main": "lib/index.js",
