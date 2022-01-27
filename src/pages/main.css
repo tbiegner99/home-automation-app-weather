@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+.mainPage {
+   display: flex;
+   justify-content: center ;
+    width:100%;
+}
+.pageContent {
+    width:100%;
+    max-width: 1080px;
+}

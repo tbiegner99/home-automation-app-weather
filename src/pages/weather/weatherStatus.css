@@ -1,0 +1,18 @@
+.weatherStatus {
+    display:flex;
+
+}
+.weatherStatus > * {
+    display:flex;
+    align-items: center;
+}
+
+.windSpeed {
+    height:35px;
+    width:50px;
+}
+
+.temperature {
+    padding: 0 10px;
+
+}

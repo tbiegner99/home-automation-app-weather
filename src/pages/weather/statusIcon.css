@@ -1,0 +1,13 @@
+.unknownStatus {
+    font-size:40%;
+}
+.unknownIcon {
+    font-size: 50%;
+    flex-grow:1;
+}
+
+.unknownIconContainer {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
