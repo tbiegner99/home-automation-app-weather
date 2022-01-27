@@ -1,9 +1,8 @@
 extends: ["airbnb", "prettier"]
-parser: "babel-eslint"
 parserOptions:
-  ecmaVersion: 8
+  ecmaVersion: 2022
   sourceType: "module"
-env:
+env: 
   es6: true
   browser: true
 rules:
