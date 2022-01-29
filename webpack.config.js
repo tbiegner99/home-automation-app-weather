@@ -1,19 +1,24 @@
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
-  mode: 'development',
+  mode: 'production',
   entry: './src/app.js',
   output: {
     filename: 'weather-app.js', // '[name].[contenthash].bundle.js',
-    libraryTarget: 'system',
+    library: {
+      type: 'system'
+    },
+
     path: path.resolve(__dirname, 'build', process.env.OUTDIR || ''),
     publicPath: '/'
   },
-  externals: ['react', 'react-dom'], // , '@tbiegner99/home-automation-components'],
+  externals: ['react', 'react-dom'], // '@tbiegner99/home-automation-components'],
   devServer: {
-    hot: true,
+    hot: false,
     host: '0.0.0.0',
     port: 8002,
     headers: {
@@ -24,7 +29,7 @@ module.exports = {
 
     historyApiFallback: true
   },
-
+  //plugins: [new BundleAnalyzerPlugin()],
   module: {
     rules: [
       {
@@ -32,11 +37,11 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader']
       },
-      /* {
+      {
         test: /\.svg$/,
         include: [path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free/svgs')],
         use: ['@svgr/webpack']
-      }, */
+      },
       {
         test: /\.(png|jpe?g|svg|gif|eot|woff2?|ttf)$/i,
         exclude: [path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free/svgs')],
@@ -45,10 +50,6 @@ module.exports = {
             loader: 'file-loader'
           }
         ]
-      },
-      {
-        test: /\.html?$/i,
-        use: ['html-loader']
       },
       {
         test: /\.css$/,

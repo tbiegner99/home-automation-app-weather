@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ApplicationActionCreator } from '@tbiegner99/ui-app-components';
 import NavBar from './navs/NavBar';
-import CurrentTime from '../../components/elements/CurrentTime';
-import ApplicationActionCreator from '../../actionCreators/ApplicationActionCreator';
 import styles from './main.css';
 import CurrentWeatherPage from './current/CurrentWeatherPage';
 import Urls from '../../utils/Urls';
-import { American } from '../../utils/Units';
-import { H3 } from '../../components/elements/Headers';
+import { H3, AmericanUnits as American, CurrentTime } from '@tbiegner99/home-automation-components';
 
 const CURRENT = 'currentWeather';
 const FORECAST = 'forecast';
@@ -51,7 +49,7 @@ class WeatherPage extends React.Component {
         <NavBar onHomeClick={() => onChangeUrl(Urls.HOME)} />
 
         <H3 className={styles.time}>
-          <CurrentTime format="dddd MMMM Do YYYY" />
+          <CurrentTime format="dddd MMMM D YYYY" />
           <CurrentTime format="hh:mma" />
         </H3>
         <div className={styles.options}>

@@ -1,6 +1,7 @@
-import BaseActionCreator from '../BaseActionCreator';
-import WeatherDatasource from '../../datasource/weather/WeatherDatasource';
-import WeatherEvents from '../../events/WeatherEvents';
+import { BaseActionCreator } from '@tbiegner99/ui-app-components';
+
+import WeatherDatasource from '../datasource/WeatherDatasource';
+import WeatherEvents from '../events/WeatherEvents';
 
 class WeatherActionCreator extends BaseActionCreator {
   async getCurrentWeather() {

@@ -1,7 +1,6 @@
-import AbstractReducingStore from '../AbstractReducingStore';
-import StoreField from '../StoreField';
+import { AbstractReducingStore, StoreField } from '@tbiegner99/ui-app-components';
 import WeatherEvents from '../../events/WeatherEvents';
-import WeatherActionCreator from '../../actionCreators/weather/WeatherActionCreator';
+import WeatherActionCreator from '../../actionCreators/WeatherActionCreator';
 
 class ApplicationStore extends AbstractReducingStore {
   constructor() {

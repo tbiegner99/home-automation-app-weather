@@ -1,19 +1,14 @@
 import React from 'react';
-import { HeaderNavBar } from '../../../components/menus/HeaderNav';
+import { HeaderNav, HomeIcon } from '@tbiegner99/home-automation-components';
 import Branding from './Branding';
-import MenuItem from '../../../components/menus/MenuItem';
-import ToggleMenuItem from '../../../components/menus/ToggleMenuItem';
-import { HomeIcon, PowerIcon, MuteIcon } from '../../../components/icons/Icons';
-
-import styles from './navBar.css';
 
 const NavBar = (props) => (
-  <HeaderNavBar>
+  <HeaderNav>
     <div />
 
     <Branding />
     <HomeIcon onClick={props.onHomeClick} />
-  </HeaderNavBar>
+  </HeaderNav>
 );
 
 export default NavBar;

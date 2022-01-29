@@ -1,4 +1,5 @@
-import BaseDatasource from '../BaseDatasource';
+import { BaseDatasource } from '@tbiegner99/ui-app-components';
+
 import WeatherSerializer from '../serializers/weather/WeatherSerializer';
 
 const BASE_URL = 'https://api.weather.gov';

@@ -1,10 +1,9 @@
 import React from 'react';
 import combineClasses from 'classnames';
-import Units, { getPreferredUnit } from '../../utils/Units';
-import ArrowIcon from '../../components/icons/svg/ArrowIcon';
+import { ConvertableValue, Units, getPreferredUnit } from '@tbiegner99/home-automation-components';
+import ArrowIcon from '../../icons/svg/ArrowIcon';
 
 import styles from './windIcon.css';
-import ConvertableValue from '../../utils/ConvertableValue';
 
 const WindIcon = (props) => {
   const {

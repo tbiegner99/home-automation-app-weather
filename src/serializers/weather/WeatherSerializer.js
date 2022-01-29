@@ -1,63 +1,75 @@
 import moment from 'moment';
-import Units from '../../../utils/Units';
-import ConvertableValue, { Temperature, Pressure } from '../../../utils/ConvertableValue';
+import { ConvertableValue, Units } from '@tbiegner99/home-automation-components';
+import { number } from 'prop-types';
 
 const WeatherUnits = {
-  'unit:degC': Units.Temperature.CELCIUS,
-  'unit:m_s-1': Units.Speed.METERS_PER_SECOND,
-  'unit:km_h-1': Units.Speed.KILOMETERS_PER_HOUR,
-  'unit:m': Units.Distance.METERS,
-  'unit:degree_(angle)': Units.Angle.DEGREES,
-  'unit:Pa': Units.Pressure.PASCALS,
-  'unit:percent': Units.Number.PERCENT
+  degC: Units.Temperature.CELCIUS,
+  'm_s-1': Units.Speed.METERS_PER_SECOND,
+  'km_h-1': Units.Speed.KILOMETERS_PER_HOUR,
+  m: Units.Distance.METERS,
+  'degree_(angle)': Units.Angle.DEGREES,
+  Pa: Units.Pressure.PASCALS,
+  percent: Units.Number.PERCENT
 };
 
-const createDistance = (obj, defaultValue) => {
-  const value = obj.value || defaultValue;
-  if (Number.isNaN(value)) return null;
-  return new Temperature(value, WeatherUnits[obj.unitCode]);
+const getUnit = (unitCode, defaultUnit) => {
+  if (!unitCode) {
+    return defaultUnit;
+  }
+  return WeatherUnits[unitCode.split(':')[1]] || defaultUnit;
 };
 
-const createTemperature = (obj) => {
-  if (!obj.value) return null;
-  return new Temperature(obj.value, WeatherUnits[obj.unitCode] || Units.Temperature.CELCIUS);
+const createDistance = (obj, defaultValue, defaultUnit) => {
+  let value = obj.value || defaultValue;
+  return new ConvertableValue(value, getUnit(obj.unitCode, defaultUnit));
 };
 
-const createPressure = (obj) => {
-  if (!obj.value) return null;
-  return new Pressure(obj.value, WeatherUnits[obj.unitCode]);
+const createTemperature = (obj, defaultUnit) => {
+  return new ConvertableValue(obj.value, getUnit(obj.unitCode, defaultUnit));
 };
 
-const createSpeed = (obj) => {
+const createPressure = (obj, defaultUnit) => {
+  return new ConvertableValue(obj.value, getUnit(obj.unitCode, defaultUnit));
+};
+
+const createSpeed = (obj, defaultUnit) => {
   const value = !obj.value ? 0 : obj.value;
-  return new ConvertableValue(value, WeatherUnits[obj.unitCode]);
+  return new ConvertableValue(value, getUnit(obj.unitCode, defaultUnit));
 };
 
-const createAngle = (obj) => {
+const createAngle = (obj, defaultUnit) => {
   const value = !obj.value ? 0 : obj.value;
-  return new ConvertableValue(value, WeatherUnits[obj.unitCode]);
+  return new ConvertableValue(value, getUnit(obj.unitCode, defaultUnit));
 };
 
 const createPercent = (obj, defaultValue) => {
   const value = !obj.value ? defaultValue : obj.value;
-  return new ConvertableValue(value, WeatherUnits[obj.unitCode]);
+  return new ConvertableValue(value, getUnit(obj.unitCode, Units.Number.PERCENT));
 };
 
 class WeatherSerializer {
   fromCurrentWeatherResponse(observation) {
     const { properties } = observation;
+    const presentWeather = properties.presentWeather[0];
     return {
-      precipitationLastHour: createDistance(properties.precipitationLastHour, 0),
+      precipitationLastHour: createDistance(
+        properties.precipitationLastHour,
+        0,
+        Units.Distance.METERS_PER_SECOND
+      ),
       timestamp: moment(properties.timestamp),
-      temperature: createTemperature(properties.temperature),
-      dewpoint: createTemperature(properties.dewpoint),
-      windChill: createTemperature(properties.windChill),
-      heatIndex: createTemperature(properties.heatIndex),
-      barometricPressure: createPressure(properties.barometricPressure),
-      windSpeed: createSpeed(properties.windSpeed),
-      windDirection: createAngle(properties.windDirection),
+      temperature: createTemperature(properties.temperature, Units.Temperature.CELCIUS),
+      dewpoint: createTemperature(properties.dewpoint, Units.Temperature.CELCIUS),
+      windChill: createTemperature(properties.windChill, Units.Temperature.CELCIUS),
+      heatIndex: createTemperature(properties.heatIndex, Units.Temperature.CELCIUS),
+      barometricPressure: createPressure(properties.barometricPressure, Units.Pressure.PASCALS),
+      windSpeed: createSpeed(properties.windSpeed, Units.Speed.METERS_PER_SECOND),
+      windDirection: createAngle(properties.windDirection, Units.Angle.DEGREES),
       relativeHumidity: createPercent(properties.relativeHumidity, 0),
-      status: properties.textDescription
+      status: properties.textDescription,
+      intensity: presentWeather.intensity,
+      modifier: presentWeather.modifier,
+      weather: presentWeather.weather
     };
   }
 }

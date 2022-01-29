@@ -1,11 +1,15 @@
 import React from 'react';
 
-import StatusIcon from '../StatusIcon';
-import { getPreferredUnit, American, Metric } from '../../../utils/Units';
-import Utilities from '../../../utils/Utilities';
+import {
+  Utilities,
+  getPreferredUnit,
+  SunriseDisplay as Sunrise,
+  MetricUnits as Metric,
+  WeatherStatusIcon
+} from '@tbiegner99/home-automation-components';
+
 import styles from './currentWeatherPage.css';
 import WindIcon from '../WindIcon';
-import Sunrise from '../Sunrise';
 
 const DEFAULT_SYSTEM = Metric;
 const TemperatureDisplay = (props) => {
@@ -73,11 +77,12 @@ const CurrentWeatherPage = (props) => {
   return (
     <div className={styles.weatherContent}>
       <div className={styles.overview}>
-        <StatusIcon
+        <WeatherStatusIcon
           className={styles.statusIcon}
           isNight={Utilities.isNight()}
           unknownIcon
           status={currentWeather.status}
+          weather={currentWeather.weather}
         />
         <div className={styles.statusText}>{currentWeather.status}</div>
         <div className={styles.windTemperature}>
