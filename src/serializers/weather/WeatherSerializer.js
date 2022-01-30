@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { ConvertableValue, Units } from '@tbiegner99/home-automation-components';
-import { number } from 'prop-types';
 
 const WeatherUnits = {
   degC: Units.Temperature.CELCIUS,
@@ -50,7 +49,7 @@ const createPercent = (obj, defaultValue) => {
 class WeatherSerializer {
   fromCurrentWeatherResponse(observation) {
     const { properties } = observation;
-    const presentWeather = properties.presentWeather[0];
+    const presentWeather = properties.presentWeather[0] || {};
     return {
       precipitationLastHour: createDistance(
         properties.precipitationLastHour,

@@ -16,7 +16,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build', process.env.OUTDIR || ''),
     publicPath: '/'
   },
-  externals: ['react', 'react-dom'], // '@tbiegner99/home-automation-components'],
+  externals: ['react', 'react-dom', '@tbiegner99/home-automation-components'],
   devServer: {
     hot: false,
     host: '0.0.0.0',
