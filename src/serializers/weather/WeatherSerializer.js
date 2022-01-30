@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { ConvertableValue, Units } from '@tbiegner99/home-automation-components';
 
 const WeatherUnits = {
@@ -56,7 +55,7 @@ class WeatherSerializer {
         0,
         Units.Distance.METERS_PER_SECOND
       ),
-      timestamp: moment(properties.timestamp),
+      timestamp: properties.timestamp,
       temperature: createTemperature(properties.temperature, Units.Temperature.CELCIUS),
       dewpoint: createTemperature(properties.dewpoint, Units.Temperature.CELCIUS),
       windChill: createTemperature(properties.windChill, Units.Temperature.CELCIUS),

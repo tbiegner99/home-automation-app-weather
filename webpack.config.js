@@ -1,6 +1,6 @@
 const path = require('path');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const Visualizer = require('webpack-visualizer-plugin2');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -29,7 +29,11 @@ module.exports = {
 
     historyApiFallback: true
   },
-  //plugins: [new BundleAnalyzerPlugin()],
+  plugins: [
+    new Visualizer({
+      filename: './statistics.html'
+    })
+  ],
   module: {
     rules: [
       {
