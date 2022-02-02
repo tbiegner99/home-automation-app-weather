@@ -1,5 +1,5 @@
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const Visualizer = require('webpack-visualizer-plugin2');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -19,8 +19,8 @@ module.exports = {
   externals: ['react', 'react-dom', '@tbiegner99/home-automation-components'],
   devServer: {
     hot: false,
-    host: '0.0.0.0',
-    port: 8002,
+    host: '0.0.0.0', 
+    port: 8005,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',

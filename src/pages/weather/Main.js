@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationActionCreator } from '@tbiegner99/ui-app-components';
-import NavBar from './navs/NavBar';
+import { H3, AmericanUnits as American, CurrentTime } from '@tbiegner99/home-automation-components';
 import styles from './main.css';
 import CurrentWeatherPage from './current/CurrentWeatherPage';
-import Urls from '../../utils/Urls';
-import { H3, AmericanUnits as American, CurrentTime } from '@tbiegner99/home-automation-components';
 
 const CURRENT = 'currentWeather';
 const FORECAST = 'forecast';
@@ -43,11 +41,8 @@ class WeatherPage extends React.Component {
   }
 
   render() {
-    const { onChangeUrl } = this.props;
     return (
       <div className={styles.weatherPage}>
-        <NavBar onHomeClick={() => onChangeUrl(Urls.HOME)} />
-
         <H3 className={styles.time}>
           <CurrentTime format="dddd MMMM D YYYY" />
           <CurrentTime format="hh:mma" />
